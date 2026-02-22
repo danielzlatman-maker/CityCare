@@ -8,7 +8,7 @@ The application runs on Node.js using Express, EJS views, and a MySQL database.
 
 
 
-Open: http://localhost:3000
+Open: http://shanipe.mtacloud.co.il/Web_Final/HTML/survey.html
 
 ## Notes for submission
 
