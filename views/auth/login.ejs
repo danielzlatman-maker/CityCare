@@ -1,0 +1,60 @@
+<%- include("../partials/head", { title: "CityCare – Login" }) %>
+<%- include("../partials/nav") %>
+
+<main class="container narrow">
+  <section class="card">
+    <h1>Login</h1>
+    <p class="muted">Enter your username and password.</p>
+
+    <% if (typeof error !== "undefined" && error) { %>
+      <div class="alert alert-error" role="alert"><%= error %></div>
+    <% } %>
+
+    <% if (typeof success !== "undefined" && success) { %>
+      <div class="alert alert-success" role="status"><%= success %></div>
+    <% } %>
+
+    <form id="loginForm" class="form" action="/login" method="POST" novalidate>
+
+      <div class="field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          autocomplete="username"
+          minlength="4"
+          value="<%= (formData && formData.username) ? formData.username : '' %>"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          minlength="8"
+          required
+        />
+      </div>
+
+      <button class="btn" type="submit">Sign In</button>
+
+      <div class="row-between" style="margin-top:10px;">
+        <p class="tiny muted" style="margin:0;">
+          Don’t have an account? <a href="/register">Register</a>
+        </p>
+
+        <!-- Not functional -->
+        <span class="tiny muted" style="opacity:0.7; cursor:not-allowed;">
+          Forgot password?
+        </span>
+      </div>
+
+    </form>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>

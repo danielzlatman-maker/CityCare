@@ -1,0 +1,25 @@
+<%- include("../partials/head", { title: "CityCare – Search Patients" }) %>
+<%- include("../partials/nav") %>
+
+<main class="container">
+  <section class="card">
+    <h1>Search Patients</h1>
+    <p class="muted">Search by name or National ID.</p>
+
+    <form action="/patients/results" method="GET" class="form">
+      <div class="grid-2">
+        <div class="field">
+          <label for="name">Name contains</label>
+          <input id="name" name="name" placeholder="e.g., Dana" />
+        </div>
+        <div class="field">
+          <label for="nationalId">National ID</label>
+          <input id="nationalId" name="nationalId" inputmode="numeric" pattern="^\d{9}$" placeholder="9 digits" />
+        </div>
+      </div>
+      <button class="btn" type="submit">Search</button>
+    </form>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>

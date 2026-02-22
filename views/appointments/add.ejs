@@ -1,0 +1,98 @@
+<%- include("../partials/head", { title: "CityCare – New Appointment" }) %>
+<%- include("../partials/nav") %>
+
+<main class="container">
+  <section class="card">
+    <h1>New Appointment</h1>
+   
+
+    <% if (typeof error !== "undefined" && error) { %>
+      <div class="alert alert-error" role="alert"><%= error %></div>
+    <% } %>
+
+    <% if (typeof success !== "undefined" && success) { %>
+      <div class="alert alert-success" role="status"><%= success %></div>
+    <% } %>
+
+    <form id="appointmentForm" class="form" action="/appointments/add" method="POST" novalidate>
+
+      <div class="grid-2">
+
+        <div class="field">
+          <label for="patientNationalId">Patient National ID</label>
+          <input
+            id="patientNationalId"
+            name="patientNationalId"
+            inputmode="numeric"
+            maxlength="9"
+            pattern="^\d{9}$"
+            value="<%= (formData && formData.patientNationalId) ? formData.patientNationalId : '' %>"
+            required
+          />
+          <small class="hint">Exactly 9 digits.</small>
+        </div>
+
+        <div class="field">
+          <label for="departmentId">Department</label>
+          <select id="departmentId" name="departmentId" required>
+            <option value="">Choose…</option>
+            <% if (departments && departments.length) { %>
+              <% departments.forEach(function(d){ %>
+                <option
+                  value="<%= d.department_id %>"
+                  <%= (formData && String(formData.departmentId) === String(d.department_id)) ? "selected" : "" %>
+                ><%= d.department_name %></option>
+              <% }); %>
+            <% } %>
+          </select>
+          <% if (!departments || departments.length === 0) { %>
+            <small class="hint">No departments found in DB (seed the departments table).</small>
+          <% } %>
+        </div>
+
+        <div class="field">
+          <label for="doctorName">Doctor Name</label>
+          <input
+            id="doctorName"
+            name="doctorName"
+            minlength="2"
+            value="<%= (formData && formData.doctorName) ? formData.doctorName : '' %>"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="visitType">Visit Type</label>
+          <select id="visitType" name="visitType" required>
+            <option value="">Choose…</option>
+            <option value="Checkup" <%= (formData && formData.visitType === 'Checkup') ? 'selected' : '' %>>Checkup</option>
+            <option value="Follow-up" <%= (formData && formData.visitType === 'Follow-up') ? 'selected' : '' %>>Follow-up</option>
+            <option value="Emergency" <%= (formData && formData.visitType === 'Emergency') ? 'selected' : '' %>>Emergency</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="appointmentAt">Appointment Date & Time</label>
+          <input
+            id="appointmentAt"
+            name="appointmentAt"
+            type="datetime-local"
+            value="<%= (formData && formData.appointmentAt) ? formData.appointmentAt : '' %>"
+            required
+          />
+          <small class="hint">Must be in the future.</small>
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" rows="3"><%= (formData && formData.notes) ? formData.notes : '' %></textarea>
+        </div>
+
+      </div>
+
+      <button class="btn" type="submit">Save Appointment</button>
+    </form>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,52 @@
+<%- include("../partials/head", { title: "CityCare – Patient Results" }) %>
+<%- include("../partials/nav") %>
+
+<main class="container">
+  <section class="card">
+    <h1>Results</h1>
+    <p class="muted">
+      Showing results for:
+      <strong><%= query.name || "—" %></strong> /
+      <strong><%= query.nationalId || "—" %></strong>
+    </p>
+
+    <div class="field">
+      <label for="filterInput">Quick filter</label>
+      <input id="filterInput" placeholder="Type to filter table…" />
+      <small class="hint">This uses jQuery to filter rows in real time.</small>
+    </div>
+
+    <% if (!patients.length) { %>
+      <p>No patients found.</p>
+    <% } else { %>
+      <div class="table-wrap">
+        <table class="table" id="patientsTable">
+          <thead>
+            <tr>
+              <th>National ID</th>
+              <th>Full Name</th>
+              <th>DOB</th>
+              <th>Phone</th>
+              <th>Blood Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% patients.forEach(p => { %>
+              <tr>
+                <td><%= p.national_id %></td>
+                <td><%= p.full_name %></td>
+                <td><%= (p.date_of_birth || "").toString().slice(0,10) %></td>
+                <td><%= p.phone %></td>
+                <td><%= p.blood_type %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+
+    <a class="btn btn-outline" href="/patients/search">Back to Search</a>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,135 @@
+<%- include("../partials/head", { title: "CityCare – Add Patient" }) %>
+<%- include("../partials/nav") %>
+
+<main class="container">
+  <section class="card">
+    <h1>Add Patient</h1>
+    
+
+    <% if (typeof error !== "undefined" && error) { %>
+      <div class="alert alert-error" role="alert"><%= error %></div>
+    <% } %>
+
+    <% if (typeof success !== "undefined" && success) { %>
+      <div class="alert alert-success" id="successBanner" role="status"><%= success %></div>
+    <% } %>
+
+    <form id="patientForm" action="/patients/add" method="POST" class="form" novalidate>
+      <div class="grid-2">
+
+        <div class="field">
+          <label for="nationalId">National ID</label>
+          <input
+            id="nationalId"
+            name="nationalId"
+            inputmode="numeric"
+            maxlength="9"
+            pattern="^\d{9}$"
+            value="<%= (formData && formData.nationalId) ? formData.nationalId : '' %>"
+            required
+          />
+          <small class="hint">Must be exactly 9 digits.</small>
+        </div>
+
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input
+            id="fullName"
+            name="fullName"
+            minlength="2"
+            value="<%= (formData && formData.fullName) ? formData.fullName : '' %>"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="dob">Date of Birth</label>
+          <input
+            id="dob"
+            name="dob"
+            type="date"
+            value="<%= (formData && formData.dob) ? formData.dob : '' %>"
+            required
+          />
+          <small class="hint">Must be in the past.</small>
+        </div>
+
+        <div class="field">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="">Choose…</option>
+            <option value="Female" <%= (formData && formData.gender === 'Female') ? 'selected' : '' %>>Female</option>
+            <option value="Male"   <%= (formData && formData.gender === 'Male') ? 'selected' : '' %>>Male</option>
+            <option value="Other"  <%= (formData && formData.gender === 'Other') ? 'selected' : '' %>>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input
+            id="phone"
+            name="phone"
+            inputmode="tel"
+            pattern="^\+?\d{9,15}$"
+            value="<%= (formData && formData.phone) ? formData.phone : '' %>"
+            required
+          />
+          <small class="hint">9–15 digits.</small>
+        </div>
+
+        <div class="field">
+          <label for="address">Address</label>
+          <input
+            id="address"
+            name="address"
+            minlength="4"
+            value="<%= (formData && formData.address) ? formData.address : '' %>"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="bloodType">Blood Type</label>
+          <select id="bloodType" name="bloodType" required>
+            <option value="">Choose…</option>
+            <% ["A+","A-","B+","B-","AB+","AB-","O+","O-"].forEach(function(bt){ %>
+              <option
+                value="<%= bt %>"
+                <%= (formData && formData.bloodType === bt) ? 'selected' : '' %>
+              ><%= bt %></option>
+            <% }); %>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="emergencyName">Emergency Contact Name</label>
+          <input
+            id="emergencyName"
+            name="emergencyName"
+            minlength="2"
+            value="<%= (formData && formData.emergencyName) ? formData.emergencyName : '' %>"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="emergencyPhone">Emergency Contact Phone</label>
+          <input
+            id="emergencyPhone"
+            name="emergencyPhone"
+            inputmode="tel"
+            pattern="^\+?\d{9,15}$"
+            value="<%= (formData && formData.emergencyPhone) ? formData.emergencyPhone : '' %>"
+            required
+          />
+        </div>
+
+      </div>
+
+      <button class="btn" type="submit">Save Patient</button>
+      <p class="tiny muted">Feedback appears above after saving.</p>
+    </form>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>

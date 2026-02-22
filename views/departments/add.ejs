@@ -1,0 +1,83 @@
+<%- include("../partials/head", { title: "CityCare – Add Department" }) %>
+<%- include("../partials/nav") %>
+
+<main class="container">
+  <section class="card">
+    <h1>Add Department</h1>
+    
+
+    <% if (error) { %>
+      <div class="alert alert-error" 
+      role="alert"><%= error %></div>
+    <% } %>
+    <% if (success) { %>
+      <div class="alert alert-success" 
+      id="successBanner" 
+      role="status"><%= success %></div>
+    <% } %>
+
+    <form action="/departments/add" method="POST" class="form">
+      <div class="grid-2">
+        <div class="field">
+          <label for="name">Department Name</label>
+          <input id="name" 
+          name="name" 
+          minlength="2" 
+          value="<%= formData.name || '' %>" 
+          required />
+        </div>
+
+        <div class="field">
+          <label for="floor">Floor</label>
+          <input id="floor" 
+          name="floor" 
+          inputmode="numeric" 
+          pattern="^\d{1,2}$" 
+          value="<%= formData.floor || '' %>" 
+          required />
+        </div>
+
+        <div class="field">
+          <label for="phoneExt">Phone Extension</label>
+          <input id="phoneExt" 
+          name="phoneExt" 
+          inputmode="numeric" 
+          pattern="^\d{3,5}$" 
+          value="<%= formData.phoneExt || '' %>" 
+          required />
+        </div>
+
+        <div class="field">
+          <label for="headDoctor">Head Doctor</label>
+          <input id="headDoctor" 
+          name="headDoctor" 
+          minlength="2" 
+          value="<%= formData.headDoctor || '' %>" 
+          required />
+        </div>
+
+        <div class="field" style="grid-column: 1 / -1;">
+          <label for="openingHours">Opening Hours</label>
+          <input id="openingHours" 
+          name="openingHours" 
+          placeholder="Sun–Thu 08:00–16:00" 
+          value="<%= formData.openingHours || '' %>" 
+          required />
+        </div>
+
+        <div class="field" style="grid-column: 1 / -1;">
+          <label for="description">Description</label>
+          <textarea id="description" 
+          name="description" 
+          rows="3"><%= formData.description || '' %>
+        </textarea>
+        </div>
+      </div>
+
+      <button class="btn" type="submit">Save Department</button>
+      <a class="btn btn-outline" href="/departments">Back</a>
+    </form>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>

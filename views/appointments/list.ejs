@@ -1,0 +1,53 @@
+<%- include("../partials/head", { title: "CityCare – Appointments" }) %>
+<%- include("../partials/nav") %>
+
+<main class="container">
+  <section class="card">
+    <h1>Appointments</h1>
+    <p class="muted">Click “View” to open a detail screen.</p>
+
+    <% if (typeof error !== "undefined" && error) { %>
+      <div class="alert alert-error" role="alert"><%= error %></div>
+    <% } %>
+
+    <% if (typeof success !== "undefined" && success) { %>
+      <div class="alert alert-success" role="status"><%= success %></div>
+    <% } %>
+
+    <div class="table-wrap">
+      <table class="table" id="appointmentsTable">
+        <thead>
+          <tr>
+            <th>Date/Time</th>
+            <th>Patient</th>
+            <th>Department</th>
+            <th>Doctor</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if (!appointments || appointments.length === 0) { %>
+            <tr>
+              <td colspan="6" class="muted">No appointments yet.</td>
+            </tr>
+          <% } else { %>
+            <% appointments.forEach(a => { %>
+              <tr data-appointment='<%- JSON.stringify(a) %>'>
+                <td><%= (a.appointment_datetime || "").toString().slice(0,19).replace("T"," ") %></td>
+                <td><%= a.patient_name %></td>
+                <td><%= a.department_name %></td>
+                <td><%= a.doctor_name %></td>
+                <td><span class="pill"><%= a.status %></span></td>
+                <td><button class="btn btn-small viewBtn" type="button">View</button></td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>

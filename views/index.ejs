@@ -1,0 +1,74 @@
+<%- include("partials/head", { title: "CityCare – Home" }) %>
+  <%- include("partials/nav") %>
+
+    <main class="container">
+      <section class="hero" aria-label="Welcome">
+        <div class="hero-text">
+          <h1 class="home-hero-title">Welcome to CityCare Medical Center</h1>
+          <p class="home-hero-subtitle">
+            Final submission — Shani Pe’er, Daniel Zeltman, Natalie Elchanan
+          </p>
+
+
+
+          <div class="hero-actions">
+            <a class="btn" href="/patients/add">Add a Patient</a>
+            <a class="btn" href="/appointments/add">Book Appointment</a>
+            <a href="http://shanipe.mtacloud.co.il/Web_Final/HTML/survey.html" class="btn" target="_blank">
+              Patient Satisfaction Survey
+            </a>
+
+          </div>
+
+        </div>
+
+        <!-- Animation (CSS animation) -->
+        <div class="hero-visual" aria-label="Animated heartbeat">
+
+          <p class="welcome-user">
+            Hello, <strong>
+              <%= username %>
+            </strong> 👋
+          </p>
+
+          <div class="pulse-line" role="img" aria-label="Heartbeat animation"></div>
+          <p class="tiny muted">Animation: CSS keyframes</p>
+
+        </div>
+
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Scenario 1</h2>
+          <ol>
+            <li>Home</li>
+            <li>Add Patient</li>
+            <li>New Appointment</li>
+          </ol>
+          <p class="tiny muted">Goal: register a patient and schedule a visit.</p>
+        </article>
+
+        <article class="card">
+          <h2>Scenario 2</h2>
+          <ol>
+            <li>Home</li>
+            <li>Search Patients</li>
+            <li>Appointments → Detail</li>
+          </ol>
+          <p class="tiny muted">Goal: find patient info and view appointment details.</p>
+        </article>
+
+        <article class="card">
+          <h2>Quick Notes</h2>
+          <ul>
+            <li>CityCare is a medical management system.</li>
+            <li>After logging into the system, users can register new patients and schedule appointments for them in
+              existing departments.</li>
+            <li>The system also allows viewing appointment details and patient details.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <%- include("partials/footer") %>

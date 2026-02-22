@@ -1,0 +1,116 @@
+<%- include("../partials/head", { title: "CityCare – Register" }) %>
+
+<main class="container narrow">
+  <section class="card">
+    <h1>Register</h1>
+    
+
+    <% if (typeof error !== "undefined" && error) { %>
+      <div class="alert alert-error" role="alert"><%= error %></div>
+    <% } %>
+
+    <form id="registerForm" action="/register" method="POST" class="form" novalidate>
+
+      <div class="field">
+        <label for="nationalId">National ID</label>
+        <input
+          id="nationalId"
+          name="nationalId"
+          inputmode="numeric"
+          maxlength="9"
+          pattern="^\d{9}$"
+          title="Enter exactly 9 digits"
+          autocomplete="off"
+          value="<%= (formData && formData.nationalId) ? formData.nationalId : '' %>"
+          required
+        />
+        <small class="hint">Must be exactly 9 digits (validated in JS).</small>
+      </div>
+
+      <div class="field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          minlength="4"
+          value="<%= (formData && formData.username) ? formData.username : '' %>"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="email">Email (optional)</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value="<%= (formData && formData.email) ? formData.email : '' %>"
+        />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" minlength="8" required />
+        <small class="hint">Min 8 chars (validated in JS).</small>
+      </div>
+
+      <div class="field">
+        <label for="birthYear">Birth Year</label>
+        <input
+          id="birthYear"
+          name="birthYear"
+          inputmode="numeric"
+          pattern="^\d{4}$"
+          value="<%= (formData && formData.birthYear) ? formData.birthYear : '' %>"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="city">City</label>
+        <input
+          id="city"
+          name="city"
+          value="<%= (formData && formData.city) ? formData.city : '' %>"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="securityQuestion">Security Question</label>
+        <select id="securityQuestion" name="securityQuestion" required>
+          <option value="">Choose…</option>
+          <option value="pet" <%= (formData && formData.securityQuestion === 'pet') ? 'selected' : '' %>>
+            What was your first pet’s name?
+          </option>
+          <option value="teacher" <%= (formData && formData.securityQuestion === 'teacher') ? 'selected' : '' %>>
+            What is your favorite teacher’s name?
+          </option>
+          <option value="street" <%= (formData && formData.securityQuestion === 'street') ? 'selected' : '' %>>
+            What street did you grow up on?
+          </option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="securityAnswer">Security Answer</label>
+        <input
+          id="securityAnswer"
+          name="securityAnswer"
+          minlength="2"
+          value="<%= (formData && formData.securityAnswer) ? formData.securityAnswer : '' %>"
+          required
+        />
+      </div>
+
+      <button class="btn" type="submit">Create Account</button>
+
+      <p class="tiny muted">
+        Already have an account? <a href="/login">Login</a>
+      </p>
+
+    </form>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>

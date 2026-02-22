@@ -1,0 +1,46 @@
+<%- include("../partials/head", { title: "CityCare – Departments" }) %>
+<%- include("../partials/nav") %>
+
+<main class="container">
+  <section class="card">
+    <div class="row-between">
+      <h1>Departments</h1>
+      <a class="btn btn-small" href="/departments/add">Add Department</a>
+    </div>
+
+    <% if (error) { %>
+      <div class="alert alert-error" role="alert"><%= error %></div>
+    <% } %>
+
+    <% if (!departments.length) { %>
+      <p>No departments yet. Add the first one.</p>
+    <% } else { %>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Floor</th>
+              <th>Phone Ext</th>
+              <th>Head Doctor</th>
+              <th>Opening Hours</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% departments.forEach(d => { %>
+              <tr>
+                <td><%= d.department_name %></td>
+                <td><%= d.floor %></td>
+                <td><%= d.phone_ext %></td>
+                <td><%= d.head_doctor %></td>
+                <td><%= d.opening_hours %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>
