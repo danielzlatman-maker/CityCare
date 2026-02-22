@@ -6,15 +6,18 @@ The system is designed to manage patients and appointments while demonstrating f
 
 The application runs on Node.js using Express, EJS views, and a MySQL database.
 
+For C_Panel part: http://shanipe.mtacloud.co.il/Web_Final/HTML/survey.html
 
+Open the entire project:  http://localhost:3000
 
-Open:  http://localhost:3000
+*Since the node_modules folder is excluded from the repository , you must install the prerequisites:
+
+1.npm install.
+
+2.npm start.
 
 ## Notes for submission
 
-*Since the node_modules folder is excluded from the repository , you must install the prerequisites:
-1.npm install.
-2.npm start.
 
 1) System Functionality
 
