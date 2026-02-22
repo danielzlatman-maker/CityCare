@@ -8,10 +8,13 @@ The application runs on Node.js using Express, EJS views, and a MySQL database.
 
 
 
-Open: http://shanipe.mtacloud.co.il/Web_Final/HTML/survey.html
+Open:  http://localhost:3000
 
 ## Notes for submission
 
+*Since the node_modules folder is excluded from the repository , you must install the prerequisites:
+1.npm install.
+2.npm start.
 
 1) System Functionality
 
